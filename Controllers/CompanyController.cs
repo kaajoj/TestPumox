@@ -12,23 +12,23 @@ namespace TestPumox.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CompaniesController : ControllerBase
+    public class CompanyController : ControllerBase
     {
         private readonly TestPumoxContext _context;
 
-        public CompaniesController(TestPumoxContext context)
+        public CompanyController(TestPumoxContext context)
         {
             _context = context;
         }
 
-        // GET: api/Companies
+        // GET: Companies
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompany()
         {
             return await _context.Company.ToListAsync();
         }
 
-        // GET: api/Companies/5
+        // GET: Company/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(long id)
         {
@@ -42,8 +42,8 @@ namespace TestPumox.Controllers
             return company;
         }
 
-        // PUT: api/Companies/5
-        [HttpPut("{id}")]
+        // PUT: Company/5
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> PutCompany(long id, Company company)
         {
             if (id != company.Id)
@@ -69,21 +69,21 @@ namespace TestPumox.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetCompany", new { id = company.Id }, "Id: " + company.Id + " updated");
         }
 
-        // POST: api/Companies
-        [HttpPost]
+        // POST: Company/create
+        [HttpPost("create")]
         public async Task<ActionResult<Company>> PostCompany(Company company)
         {
             _context.Company.Add(company);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCompany", new { id = company.Id }, company);
+            return CreatedAtAction("GetCompany", new { id = company.Id }, "Id: " + company.Id);
         }
 
-        // DELETE: api/Companies/5
-        [HttpDelete("{id}")]
+        // DELETE: Company/5
+        [HttpDelete("delete/{id}")]
         public async Task<ActionResult<Company>> DeleteCompany(long id)
         {
             var company = await _context.Company.FindAsync(id);

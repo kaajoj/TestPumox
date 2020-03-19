@@ -12,23 +12,23 @@ namespace TestPumox.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
         private readonly TestPumoxContext _context;
 
-        public EmployeesController(TestPumoxContext context)
+        public EmployeeController(TestPumoxContext context)
         {
             _context = context;
         }
 
-        // GET: api/Employees
+        // GET: Employee
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
         {
             return await _context.Employee.ToListAsync();
         }
 
-        // GET: api/Employees/5
+        // GET: Employee/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(long id)
         {
@@ -42,7 +42,7 @@ namespace TestPumox.Controllers
             return employee;
         }
 
-        // PUT: api/Employees/5
+        // PUT: Employee/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(long id, Employee employee)
         {
@@ -72,7 +72,7 @@ namespace TestPumox.Controllers
             return NoContent();
         }
 
-        // POST: api/Employees
+        // POST: Employee
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
@@ -82,7 +82,7 @@ namespace TestPumox.Controllers
             return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
         }
 
-        // DELETE: api/Employees/5
+        // DELETE: Employee/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(long id)
         {
