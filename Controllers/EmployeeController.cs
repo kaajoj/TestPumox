@@ -21,14 +21,14 @@ namespace TestPumox.Controllers
             _context = context;
         }
 
-        // GET: Employee
+        // GET: employee
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
         {
             return await _context.Employee.ToListAsync();
         }
 
-        // GET: Employee/5
+        // GET: employee/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(long id)
         {
@@ -42,7 +42,7 @@ namespace TestPumox.Controllers
             return employee;
         }
 
-        // PUT: Employee/5
+        // PUT: employee/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(long id, Employee employee)
         {
@@ -72,7 +72,7 @@ namespace TestPumox.Controllers
             return NoContent();
         }
 
-        // POST: Employee
+        // POST: employee
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
@@ -82,7 +82,7 @@ namespace TestPumox.Controllers
             return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
         }
 
-        // DELETE: Employee/5
+        // DELETE: employee/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(long id)
         {

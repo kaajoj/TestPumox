@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using TestPumox.Data;
 using TestPumox.Models;
 
@@ -21,28 +23,37 @@ namespace TestPumox.Controllers
             _context = context;
         }
 
-        // GET: Companies
+        // GET: company
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompany()
         {
-            return await _context.Company.ToListAsync();
+            // return await _context.Company.ToListAsync();
+            return await _context.Company.Include(s => s.Employees).ToListAsync();
         }
 
-        // GET: Company/5
+        // GET: company/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(long id)
         {
-            var company = await _context.Company.FindAsync(id);
+            var company = _context.Company
+                .Where(s => s.Id == id)
+                .Include(s => s.Employees)
+                .FirstOrDefault();
+
+            // var company = await _context.Company.FindAsync(id);
 
             if (company == null)
             {
                 return NotFound();
             }
 
+            // var employee = await _context.Employee.FindAsync(id);
+            // company.Employees.Add(employee);
+
             return company;
         }
 
-        // PUT: Company/5
+        // PUT: company/5
         [HttpPut("update/{id}")]
         public async Task<IActionResult> PutCompany(long id, Company company)
         {
@@ -72,7 +83,7 @@ namespace TestPumox.Controllers
             return CreatedAtAction("GetCompany", new { id = company.Id }, "Id: " + company.Id + " updated");
         }
 
-        // POST: Company/create
+        // POST: company/create
         [HttpPost("create")]
         public async Task<ActionResult<Company>> PostCompany(Company company)
         {
@@ -82,7 +93,21 @@ namespace TestPumox.Controllers
             return CreatedAtAction("GetCompany", new { id = company.Id }, "Id: " + company.Id);
         }
 
-        // DELETE: Company/5
+        // POST: company/search
+        [HttpPost("search")]
+        public async Task<IIncludableQueryable<Company, List<Employee>>> SearchCompany(Search search)
+        {
+            
+            var company = _context.Company
+                .Where(s => s.Name.Contains(search.Keyword))
+                .Include(s => s.Employees);
+
+
+            return company;
+            // return CreatedAtAction("GetCompany", new { id = company.Id }, "Id: " + company.Id);
+        }
+
+        // DELETE: company/5
         [HttpDelete("delete/{id}")]
         public async Task<ActionResult<Company>> DeleteCompany(long id)
         {
