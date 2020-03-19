@@ -15,15 +15,13 @@ namespace TestPumox.Models
 
     public class Employee
     {
-        public Int64 EmployeeId { get; set; }
+        public long EmployeeId { get; set; }
         public string FirstName { get; set; }
 
-        public string SurName { get; set; }
+        public string LastName { get; set; }
 
-        public DateTime BirthdayDate { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
-        public PositionName Name { get; set; }
-
-        public Int64 CompanyId { get; set; }
+        public PositionName JobTitle { get; set; }
     }
 }
