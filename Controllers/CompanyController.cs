@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
@@ -12,8 +14,8 @@ using TestPumox.Models;
 
 namespace TestPumox.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class CompanyController : ControllerBase
     {
         private readonly TestPumoxContext _context;
@@ -35,9 +37,9 @@ namespace TestPumox.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(long id)
         {
-            var company = _context.Company
-                .Where(s => s.Id == id)
-                .Include(s => s.Employees)
+            var company =  _context.Company
+                .Where(c => c.Id == id)
+                .Include(c => c.Employees)
                 .FirstOrDefault();
 
             // var company = await _context.Company.FindAsync(id);
@@ -47,8 +49,7 @@ namespace TestPumox.Controllers
                 return NotFound();
             }
 
-            // var employee = await _context.Employee.FindAsync(id);
-            // company.Employees.Add(employee);
+            var employee = await _context.Employee.FindAsync(id);
 
             return company;
         }
@@ -94,17 +95,25 @@ namespace TestPumox.Controllers
         }
 
         // POST: company/search
+       
         [HttpPost("search")]
-        public async Task<IIncludableQueryable<Company, List<Employee>>> SearchCompany(Search search)
+        // [AllowAnonymous]
+        public Task<IIncludableQueryable<Company, List<Employee>>> SearchCompany(Search search)
         {
-            
-            var company = _context.Company
-                .Where(s => s.Name.Contains(search.Keyword))
-                .Include(s => s.Employees);
 
+            var companies = _context.Company
+                .Where(company => company.Name.Contains(search.Keyword))
+                .Include(emp => emp.Employees);
 
-            return company;
-            // return CreatedAtAction("GetCompany", new { id = company.Id }, "Id: " + company.Id);
+            // .Include(company => company.Employees.Find(employee =>
+            //     employee.DateOfBirth > search.EmployeeDateOfBirthFrom));
+            // (employee.DateOfBirth <= search.EmployeeDateOfBirthTo)));
+
+            // var employees = _context.Employee
+            //     .Where(e => (e.DateOfBirth >= search.EmployeeDateOfBirthFrom) &&
+            //                 (e.DateOfBirth <= search.EmployeeDateOfBirthTo));
+            // var employee = await _context.Employee.FindAsync(search.Keyword);
+            return Task.FromResult(companies);
         }
 
         // DELETE: company/5

@@ -10,8 +10,8 @@ using TestPumox.Models;
 
 namespace TestPumox.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class EmployeeController : ControllerBase
     {
         private readonly TestPumoxContext _context;
