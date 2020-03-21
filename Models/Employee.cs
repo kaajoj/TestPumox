@@ -23,5 +23,7 @@ namespace TestPumox.Models
         public DateTime DateOfBirth { get; set; }
 
         public PositionName JobTitle { get; set; }
+
+        public long CompanyId { get; set; }
     }
 }

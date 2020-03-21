@@ -10,8 +10,8 @@ using TestPumox.Data;
 namespace TestPumox.Migrations
 {
     [DbContext(typeof(TestPumoxContext))]
-    [Migration("20200319170127_5")]
-    partial class _5
+    [Migration("20200321000755_10")]
+    partial class _10
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,7 @@ namespace TestPumox.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -46,7 +47,7 @@ namespace TestPumox.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("CompanyId")
+                    b.Property<long>("CompanyId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -72,7 +73,9 @@ namespace TestPumox.Migrations
                 {
                     b.HasOne("TestPumox.Models.Company", null)
                         .WithMany("Employees")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

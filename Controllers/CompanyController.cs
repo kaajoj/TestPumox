@@ -129,7 +129,8 @@ namespace TestPumox.Controllers
             _context.Company.Remove(company);
             await _context.SaveChangesAsync();
 
-            return company;
+            // return company;
+            return Ok("Company with id " + company.Id + " removed");
         }
 
         private bool CompanyExists(long id)
