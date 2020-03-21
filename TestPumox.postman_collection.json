@@ -1,0 +1,345 @@
+{
+	"info": {
+		"_postman_id": "2df46d98-3235-4b86-af0d-e007d6997f09",
+		"name": "TestPumox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CompanyGET",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44380/company",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44380",
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CompanyPOST",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"TestCompany3\",\r\n    \"establishmentYear\": 2008,\r\n    \"employees\": [\r\n        {\r\n            \"firstName\": \"FName5\",\r\n            \"lastName\": \"LName5\",\r\n            \"dateOfBirth\": \"1982-01-01T00:00:00\",\r\n            \"jobTitle\": 0\r\n        },\r\n        {\r\n            \"firstName\": \"FName6\",\r\n            \"lastName\": \"LName6\",\r\n            \"dateOfBirth\": \"1995-01-01T00:00:00\",\r\n            \"jobTitle\": 3\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44380/company/create",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44380",
+					"path": [
+						"company",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CompanyPOSTsearch",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Keyword\": \"Company2\",\r\n\"EmployeeDateOfBirthFrom\": \"1996-01-01\",\r\n\"EmployeeDateOfBirthTo\": \"1998-01-01\",\r\n\"EmployeeJobTitles\": 3\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://localhost:44380/company/search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44380",
+					"path": [
+						"company",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CompanyUPDATE",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 3,\r\n    \"name\": \"TestCompany888\",\r\n    \"establishmentYear\": 2222,\r\n    \"employees\": [\r\n\t    {\r\n\t    \"firstName\": \"FTest2\",\r\n\t    \"lastName\": \"LTest2\",\r\n\t    \"DateOfBirth\": \"1992-01-01\",\r\n\t    \"jobTitle\": 1\r\n\t\t},\r\n\t\t{\r\n\t    \"firstName\": \"FTest3\",\r\n\t    \"lastName\": \"LTest3\",\r\n\t    \"DateOfBirth\": \"1992-01-01\",\r\n\t    \"jobTitle\": 2\r\n\t\t}\r\n\t]\r\n    \r\n}\r\n\r\n"
+				},
+				"url": {
+					"raw": "https://localhost:44380/company/update/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44380",
+					"path": [
+						"company",
+						"update",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CompanyDELETE",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44380/company/delete/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44380",
+					"path": [
+						"company",
+						"delete",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmployeePOST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"FTest22\",\r\n    \"lastName\": \"LTest\",\r\n    \"DateOfBirth\": \"1992-01-01\",\r\n    \"jobTitle\": 1,\r\n    \"companyId\": 1\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://localhost:44380/employee",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44380",
+					"path": [
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmployeePUT",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"EmployeeId\": 4,\r\n    \"firstName\": \"FTest24\",\r\n    \"lastName\": \"LTest24\",\r\n    \"DateOfBirth\": \"1992-01-01\",\r\n    \"jobTitle\": 1,\r\n    \"companyId\": 1\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://localhost:44380/employee/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44380",
+					"path": [
+						"employee",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmployeeDELETE",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44380/employee/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44380",
+					"path": [
+						"employee",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmployeeGET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44380/employee/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44380",
+					"path": [
+						"employee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
