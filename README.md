@@ -1,0 +1,15 @@
+Backend netcoreapp3.1
+
+Basic Authentication (username: user, password: pass)
+
+POST: 
+https://localhost:44380/company/create
+
+POST: 
+https://localhost:44380/company/search (Auth not needed)
+
+PUT:
+https://localhost:44380/company/update/{id}
+
+DELETE:
+https://localhost:44380/company/delete/{id}
