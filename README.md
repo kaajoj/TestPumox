@@ -13,3 +13,8 @@ https://localhost:44380/company/update/{id}
 
 DELETE:
 https://localhost:44380/company/delete/{id}
+
+Additional:
+
+GET:
+https://localhost:44380/company or https://localhost:44380/company/{id}
