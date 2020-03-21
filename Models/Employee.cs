@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,8 +17,9 @@ namespace TestPumox.Models
     public class Employee
     {
         public long EmployeeId { get; set; }
+        [Required]
         public string FirstName { get; set; }
-
+        [Required]
         public string LastName { get; set; }
 
         public DateTime DateOfBirth { get; set; }
