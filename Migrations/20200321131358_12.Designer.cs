@@ -10,8 +10,8 @@ using TestPumox.Data;
 namespace TestPumox.Migrations
 {
     [DbContext(typeof(TestPumoxContext))]
-    [Migration("20200321000755_10")]
-    partial class _10
+    [Migration("20200321131358_12")]
+    partial class _12
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,12 +54,14 @@ namespace TestPumox.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("JobTitle")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmployeeId");
